@@ -8,6 +8,7 @@ import co.edu.udea.basededatos.util.Messages;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -47,5 +48,9 @@ public class ProductoService {
     public Producto consultarPorId(Long id) {
         return productoRepository.findById(id).orElseThrow(
                 () -> new BusinessException(messages.get("producto.id.no_encontrado")));
+    }
+
+    public List<Producto> buscarTodos(Long adminClave) {
+        return productoRepository.getAllByFkAdministrador(adminClave);
     }
 }

@@ -6,6 +6,8 @@ import co.edu.udea.basededatos.service.ProductoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ProductoFacade {
@@ -32,6 +34,10 @@ public class ProductoFacade {
 
     public ProductoDTO consultarPorId(Long id){
         return productoMapper.toDto(productoService.consultarPorId(id));
+    }
+
+    public List<ProductoDTO> buscarTodos(Long adminClave) {
+        return productoMapper.toDto(productoService.buscarTodos(adminClave));
     }
 
 

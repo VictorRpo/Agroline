@@ -2,6 +2,7 @@ package co.edu.udea.basededatos.controller;
 
 import co.edu.udea.basededatos.exception.DataNotFoundException;
 import co.edu.udea.basededatos.facade.ProductoFacade;
+import co.edu.udea.basededatos.modelo.PaisDTO;
 import co.edu.udea.basededatos.modelo.ProductoDTO;
 import co.edu.udea.basededatos.modelo.UsuarioDTO;
 import co.edu.udea.basededatos.util.Messages;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/productos")
@@ -72,5 +74,14 @@ public class ProductoController {
         return ResponseEntity.ok(new StandardResponse<>(StandardResponse.StatusStandardResponse.OK, productoFacade.consultarPorId(codigoProducto)));
     }
 
+    @GetMapping("buscar-todos/{codigoAdmin}")
+    @ApiOperation(value = "Permite buscar todos los productos", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "El producto se consultó correctamente"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public ResponseEntity<StandardResponse<List<ProductoDTO>>> buscarTodos(@PathVariable Long codigoAdmin) {
+        return ResponseEntity.ok(new StandardResponse<>(StandardResponse.StatusStandardResponse.OK, productoFacade.buscarTodos(codigoAdmin)));
+    }
 
 }

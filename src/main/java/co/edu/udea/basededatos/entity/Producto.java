@@ -1,5 +1,7 @@
 package co.edu.udea.basededatos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -26,11 +28,13 @@ public class Producto {
     private Boolean disponible;
 
     @Column(name="fk_administrador", nullable=false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Long fkAdministrador;
 
     // relationships
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name="fk_administrador", insertable = false, updatable = false)
     private Usuario administrador;
 

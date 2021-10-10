@@ -1,6 +1,7 @@
 package co.edu.udea.basededatos.modelo;
 
 import co.edu.udea.basededatos.entity.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -16,7 +17,9 @@ public class ProductoDTO {
     @NotNull
     private Boolean disponible;
     @NotNull
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Long fkAdministrador;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario administrador;
 
     public Long getId() {
